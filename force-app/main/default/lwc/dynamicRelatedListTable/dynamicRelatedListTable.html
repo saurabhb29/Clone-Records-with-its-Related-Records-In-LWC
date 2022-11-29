@@ -1,0 +1,78 @@
+<template>  
+    <lightning-button variant="success" label="Open popup"
+    title="Open popup" onclick={showModalBox}>
+</lightning-button>
+
+<!-- modal start -->      
+<template if:true={isShowModal}>
+
+
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_large">
+        <div class="slds-modal__container">
+<!-- modal header start -->
+<header class="slds-modal__header">
+<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+<lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+<span class="slds-assistive-text">Close</span>
+</button>
+<lightning-icon icon-name="standard:contact">hello</lightning-icon>
+<h2 id="modal-heading-01"  class="slds-text-heading_medium slds-hyphenate">{objApiName} Records ({recordCount})</h2>
+</header>
+
+
+<!-- modal body start -->
+
+<div class="container">
+    <div class="slds-card">
+        <div class="slds-media__body">
+            <!-- <h2 class="slds-card__header-title">
+                <span>{objApiName} Records ({recordCount})</span>
+            </h2> -->
+            <lightning-input type="search"
+                             class="slds-p-around_small" 
+                             label="Search Account" 
+                             onchange={handleSearch}>
+            </lightning-input>
+        </div>
+        <div class="slds-scrollable"  >
+            <lightning-datatable key-field="id" 
+                                 data={tableData} 
+                                 columns={columns} 
+                                 sorted-by={sortBy}
+                                 sorted-direction={sortDirection}
+                                 onsort={handleSortContactData}
+                                 min-column-width=300 
+                                 onrowselection={selectedRowsHandler}
+            >
+            </lightning-datatable> 
+        </div>  
+    <!-- modal footer start-->
+<footer class="slds-modal__footer">
+    <!-- <button class="slds-button slds-button_neutral" variant="brand" onclick={showModalBox}>Ok</button> -->
+    <lightning-button style="margin-right: 10px;" variant="brand" label="Clone Records"  onclick={cloneRecordsHandler}  class="slds-m-left_xx-small"></lightning-button>
+    <button  class="slds-button slds-button_neutral" onclick={hideModalBox}>Cancel</button>
+    </footer>                        
+    </div> 
+</div>    
+
+<!-- <lightning-card>
+    <lightning-button style="text-align:center" label='buttonLabel' variant='brand' onclick={navigateToRelatedList}></lightning-button>
+</lightning-card>   -->
+<!-- <lightning-card><div class="slds-clearfix">
+
+    <a onclick={navigateToRelatedList} data-id="Active" class="slds-align_absolute-center">View All </a>
+
+  </div>
+</lightning-card> -->
+
+
+
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+
+    
+
+    
+</template>
